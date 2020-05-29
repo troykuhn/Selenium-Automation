@@ -14,10 +14,13 @@ namespace Selenium_Automation
 		// Create a reference for Chrome browser
 		IWebDriver driver = new ChromeDriver();
 
+		string ActualResult;
+		string ExpectedResult = "Google";
+
 		static void Main( string[] args )
 		{
-			
-			
+
+
 		}
 
 		[SetUp]
@@ -32,8 +35,6 @@ namespace Selenium_Automation
 		public void ExecuteTheTest()
 		{
 
-			Initialize();
-
 			//Full screen browser
 			driver.Manage().Window.Maximize();
 
@@ -43,6 +44,14 @@ namespace Selenium_Automation
 			// Enter something into the search bar
 			searchBox.SendKeys( "Automation practice - Selenium Sample" );
 
+			//Get the page title
+			ActualResult = driver.Title;
+
+			//Assert
+			Assert.AreEqual( ActualResult, ExpectedResult );
+
+			//Another assert (optional) - Doesn't show why test failed if there is a failure.
+			Assert.That( Equals( ActualResult, ExpectedResult ) );
 		}
 
 		[TearDown]
